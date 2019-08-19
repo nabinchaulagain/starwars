@@ -51,7 +51,7 @@ const ResourceView = props => {
     return "Loading....";
   }
   return (
-    <div className="jumbotron p-2">
+    <div className="jumbotron p-2 col-sm-6 mx-auto mt-3">
       <h2 className="text-center">{resource.name}</h2>
       <div className="col-sm-6 mx-auto">
         {renderResourceProperties(resource)}

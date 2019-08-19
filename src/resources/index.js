@@ -1,1 +1,1 @@
-export default ["starships", "planets", "species", "vehicles"];
+export default ["people", "starships", "planets", "species", "vehicles"];

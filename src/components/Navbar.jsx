@@ -1,29 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import resources from "../resources";
+import { capitalizeWord, findResourceInPathName } from "../helpers";
+import history from "../history";
 const Navbar = () => {
+  const [currentPage, setCurrentPage] = useState(
+    findResourceInPathName(resources, history.location.pathname)
+  );
+  history.listen(location => {
+    setCurrentPage(findResourceInPathName(resources, location.pathname));
+  });
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-dark">
       <ul className="nav ">
-        <li className="nav-item">
-          <Link className="nav-link active" to="/pages/starships">
-            Starships
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link active" to="/pages/planets">
-            Planets
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link active" to="/pages/species">
-            Species
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link active" to="/pages/vehicles">
-            Vehicles
-          </Link>
-        </li>
+        {resources.map(resource => {
+          return (
+            <li className="nav-item" key={resource}>
+              <Link
+                to={`/pages/${resource}`}
+                className={`nav-link ${
+                  currentPage === resource ? "text-info" : "text-light"
+                } `}
+              >
+                {capitalizeWord(resource)}
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </nav>
   );

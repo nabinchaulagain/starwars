@@ -50,15 +50,19 @@ const ResourceList = props => {
         {capitalizeWord(props.match.params.resource)} List
       </h1>
       {props.resources.data.map(resource => (
-        <div className="card col-md-6 mx-auto p-1" key={resource.name}>
+        <div
+          className="card col-md-6 mx-auto p-1 bg-light mb-2"
+          key={resource.name}
+        >
           <Link
+            className="text-dark"
             to={`/${props.match.params.resource}/${getIdFromURL(resource.url)}`}
           >
             <h4 className="text-center">{resource.name}</h4>
           </Link>
         </div>
       ))}
-      <div className="text-center mt-2">{renderPagination(props.pages)}</div>
+      <div className="text-center mt-3">{renderPagination(props.pages)}</div>
     </React.Fragment>
   );
 };

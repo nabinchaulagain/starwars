@@ -14,7 +14,7 @@ export const isUrl = string => {
     "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
       "(\\#[-a-z\\d_]*)?$",
     "i"
-  ); // fragment locator
+  );
   return !!pattern.test(string);
 };
 export const formatProperties = string => {
@@ -30,4 +30,17 @@ export const formatProperties = string => {
     return newStringFragments.join(" & ");
   }
   return newStringFragments.join(" ");
+};
+export const findResourceInPathName = (resourceList, pathName) => {
+  const resourceFragments = pathName.split("/");
+  if (resourceFragments[1] !== "pages") {
+    return null;
+  }
+  let resourceInPathName;
+  resourceList.forEach(resource => {
+    if (pathName.includes(resource)) {
+      resourceInPathName = resource;
+    }
+  });
+  return resourceInPathName;
 };
